@@ -6,30 +6,43 @@ import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './Table.css'
 import bonaqua from '../image/bonaqua.png';
 
-export default props => (
-	<table className="table table-bordered">
-  	<thead className="thead-dark">
-    	<tr>
-      	<th scrope="col">#</th>
-      	<th>Товар</th>
-				<th>Название</th>
-				<th>Цена</th>
-				<th>Количество</th>
-    	</tr>
-  </thead>
-	<tbody>
-		{ props.data.map(item => (
-				<tr key={item.id}>
-					<td>{item.id}</td>
-					<td><button><img src={item.picture} alt="aqua"  /></button></td>
-					<td>{item.name}</td>
-					<td>{item.price}</td>
-					<td>{item.quality}</td>
-				</tr>
-		))}
-  </tbody>
-</table>
-)
+//export default props => (
+ export default class Table1 extends React.Component {
+	// constructor(props) {
+	// super(props);
+	// this.wrapper = React.createRef();
+	// }
+	myfunction() {
+		console.log('push');
+	}
+	 render() {
+	 	return(
+			<table className="table table-bordered">
+  			<thead className="thead-dark">
+    			<tr>
+      			<th scrope="col">#</th>
+      			<th>Товар</th>
+						<th>Название</th>
+						<th>Цена</th>
+						<th>Количество</th>
+    			</tr>
+  			</thead>
+				<tbody>
+				{ this.props.data.map(item => (
+					<tr key={item.id}>
+						<td>{item.id}</td>
+						<td><button><img src={item.picture} alt="aqua" onClick={this.myfunction} /></button></td>
+						<td>{item.name}</td>
+						<td>{item.price}</td>
+						<td>{item.quality}</td>
+					</tr>
+				))}
+  			</tbody>
+			</table>
+		)
+		}
+ }
+//)
 // class Table1 extends React.Component {
 // 	constructor(props) {
 // 		super(props);
