@@ -4,7 +4,9 @@ import '../../node_modules/react-bootstrap-table/css/react-bootstrap-table.css';
 //
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './Table.css'
+import Modal from './mdlConfChoose';
 //import items from '../reducers/items';
+import modal from './modal'
 
 
 //export default props => (
@@ -12,24 +14,55 @@ class Table1 extends React.Component {
 	constructor(props) {
 		super(props);
 		this.chooseItem = this.chooseItem.bind(this);
-	// this.wrapper = React.createRef();
+
+		this.state = {showModal: false};
+
+		this.handleShow = this.handleShow.bind(this);
+		this.handleHide = this.handleHide.bind(this);
 	}
+	// Модальное окно
+	handleShow() {
+		
+		this.setState({showModal: true});
+		//console.log(e.currentTarget.id);
+	}
+
+	handleHide() {
+		this.setState({showModal: false});
+	}
+
+	// выбор товара
 	chooseItem = (e) => {
-		//console.log(e.target.id);
 		console.log(e.currentTarget.id);
+
 	}
-	// chooseItem(event) {
-	// 	//console.log('push: ' + this.itemId);
-	// 	let id = event.target.id;
-	// 	console.log(id);
-	// }
+
 	 render() {
 		 console.log('inputMoney: ' + this.props.data);
+		 	
+		 //Модальное окно modal
+		 
+		 const modal = this.state.showModal ? (
+			 <Modal>
+
+				 <div className="modal">
+					 <div>
+						 With a portal, we can render content into a different 
+						 part of the DOM, as if it were any other React child.
+					 </div>
+					 
+					 This is being renderred indeise the #modal-container div.
+					 <button onClick={this.handleHide}>Hide modal</button>
+				 </div>
+			 </Modal>
+		 ) : null;
 		 
 		//console.log(this.props.Item);
 	 	return(
+			
 			<table className="table table-bordered">
-  			<thead className="thead-dark">
+				<thead className="thead-dark">
+					{modal}
     			<tr>
       			<th scrope="col">#</th>
       			<th>Товар</th>
@@ -43,9 +76,10 @@ class Table1 extends React.Component {
 					<tr key={item.id}>
 						<td>{item.id}</td>
 						<td>
-							<button id={item.id} onClick={this.chooseItem}>
-							<img src={item.picture} alt={item.id}   />
+							<button id={item.id} onClick={this.handleShow}>
+								<img src={item.picture} alt={item.id} />
 							</button>
+							
 						</td>
 						<td>{item.name}</td>
 						<td>{item.price}</td>
@@ -53,11 +87,13 @@ class Table1 extends React.Component {
 					</tr>
 				))}
 				</tbody>
-			</table>
-			
+			</table>	
+
 		)
 		}
  }
+
+ 
  export default connect(
 	 state =>({
 		 Item: state,
@@ -65,53 +101,3 @@ class Table1 extends React.Component {
 	 }),
 	 dispatch => ({})
  )(Table1);
-//)
-// class Table1 extends React.Component {
-// 	constructor(props) {
-// 		super(props);
-// 		this.wrapper = React.createRef();
-// 	}
-// 	render() {
-// 		return (
-// 			<div ref={this.wrapper}>{this.props.children}
-			
-// 				<BootstrapTable data={this.props.data}>
-// 					<TableHeaderColumn isKey dataField='id'>
-// 					ID
-// 					</TableHeaderColumn>
-// 					<TableHeaderColumn dataField='name'>
-// 					Name
-// 					</TableHeaderColumn>
-// 					<TableHeaderColumn dataField='value'>
-// 					Value
-// 					</TableHeaderColumn>
-// 				</BootstrapTable>	
-			
-// 				</div>
-
-// 		);
-// 	}
-// }
-
-// export default Table1;
-
-
-
-
-
-
-// export default class Table1 extends React.Component {
-// 	static propTypes = {
-// 		name: React.PropTypes.string,
-// 	};
-
-// 	constructor(props) {
-// 		super(props);
-// 	}
-
-// 	render() {
-// 		return (
-// 			<div> </div>
-// 		)
-// 	}
-// }

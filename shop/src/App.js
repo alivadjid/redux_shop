@@ -33,7 +33,7 @@ class App extends Component{
         <input type="text" value={this.state.value} onChange={this.handleChange} className="moneyInput"/>
         
         <p>
-          Basic Table
+          Вендинговый аппарат
         </p>
         < div className="container">
         <Table1 data={this.state.value}/>
@@ -42,6 +42,7 @@ class App extends Component{
       </header>
       
       </div>
+      
     
   );
   }
