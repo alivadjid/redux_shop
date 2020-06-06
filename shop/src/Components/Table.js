@@ -9,15 +9,24 @@ import './Table.css'
 
 //export default props => (
 class Table1 extends React.Component {
-	// constructor(props) {
-	// super(props);
+	constructor(props) {
+		super(props);
+		this.chooseItem = this.chooseItem.bind(this);
 	// this.wrapper = React.createRef();
-	// }
-	myfunction() {
-		console.log('push');
 	}
+	chooseItem = (e) => {
+		//console.log(e.target.id);
+		console.log(e.currentTarget.id);
+	}
+	// chooseItem(event) {
+	// 	//console.log('push: ' + this.itemId);
+	// 	let id = event.target.id;
+	// 	console.log(id);
+	// }
 	 render() {
-		console.log(this.props.Item);
+		 console.log('inputMoney: ' + this.props.data);
+		 
+		//console.log(this.props.Item);
 	 	return(
 			<table className="table table-bordered">
   			<thead className="thead-dark">
@@ -33,7 +42,11 @@ class Table1 extends React.Component {
 				{ this.props.Item.items.map(item => (
 					<tr key={item.id}>
 						<td>{item.id}</td>
-						<td><button><img src={item.picture} alt="aqua" onClick={this.myfunction} /></button></td>
+						<td>
+							<button id={item.id} onClick={this.chooseItem}>
+							<img src={item.picture} alt={item.id}   />
+							</button>
+						</td>
 						<td>{item.name}</td>
 						<td>{item.price}</td>
 						<td>{item.quality}</td>

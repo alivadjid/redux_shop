@@ -43,4 +43,33 @@
         </span>
         <span>
 				<button><img src={bonaqua} alt="aqua" onClick={this.myfunction} /></button>
-				</span>
+        </span>
+        
+
+
+        render() {
+          return(
+           <table className="table table-bordered">
+             <thead className="thead-dark">
+               <tr>
+                 <th scrope="col">#</th>
+                 <th>Товар</th>
+                 <th>Название</th>
+                 <th>Цена</th>
+                 <th>Количество</th>
+               </tr>
+             </thead>
+             <tbody>
+             { this.props.data.map(item => (
+               <tr key={item.id}>
+                 <td>{item.id}</td>
+                 <td><button><img src={item.picture} alt="aqua" onClick={this.myfunction} /></button></td>
+                 <td>{item.name}</td>
+                 <td>{item.price}</td>
+                 <td>{item.quality}</td>
+               </tr>
+             ))}
+             </tbody>
+           </table>
+         )
+         }

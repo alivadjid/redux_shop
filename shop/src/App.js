@@ -10,25 +10,33 @@ import Table1 from './Components/Table';
 
 //function App() {
 
-  // var data = [
+  //var data = [
   //   {id: 1, picture: bonaqua, name: 'Бонаква', price: '30', quality: '14'},
   //   {id: 2, picture: snickers, name: 'Сникерс', price: '42', quality: '20'},
   //   {id: 3, picture: orbit, name: 'Орбит', price: '24', quality: '36'}
   // ];
-  console.log (typeof(data));
+  //console.log (typeof(data));
 class App extends Component{  
-  
-  
+  constructor(props) {
+    super(props);
+    this.state = { value: ''};
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleChange(event) {
+    this.setState({ value: event.target.value });
+    
+  }
   render() {
   return (
     <div className="App">
       <header className="App-header">
-        <input type="text"  className="trackInput"/>
+        <input type="text" value={this.state.value} onChange={this.handleChange} className="moneyInput"/>
+        
         <p>
           Basic Table
         </p>
         < div className="container">
-        <Table1 />
+        <Table1 data={this.state.value}/>
         </div>
       
       </header>
