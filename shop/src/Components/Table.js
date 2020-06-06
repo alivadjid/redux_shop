@@ -1,13 +1,14 @@
 import React from 'react';
-import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
+import { connect } from 'react-redux';
 import '../../node_modules/react-bootstrap-table/css/react-bootstrap-table.css';
 //
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './Table.css'
-import bonaqua from '../image/bonaqua.png';
+//import items from '../reducers/items';
+
 
 //export default props => (
- export default class Table1 extends React.Component {
+class Table1 extends React.Component {
 	// constructor(props) {
 	// super(props);
 	// this.wrapper = React.createRef();
@@ -16,6 +17,7 @@ import bonaqua from '../image/bonaqua.png';
 		console.log('push');
 	}
 	 render() {
+		console.log(this.props.Item);
 	 	return(
 			<table className="table table-bordered">
   			<thead className="thead-dark">
@@ -28,7 +30,7 @@ import bonaqua from '../image/bonaqua.png';
     			</tr>
   			</thead>
 				<tbody>
-				{ this.props.data.map(item => (
+				{ this.props.Item.items.map(item => (
 					<tr key={item.id}>
 						<td>{item.id}</td>
 						<td><button><img src={item.picture} alt="aqua" onClick={this.myfunction} /></button></td>
@@ -37,11 +39,19 @@ import bonaqua from '../image/bonaqua.png';
 						<td>{item.quality}</td>
 					</tr>
 				))}
-  			</tbody>
+				</tbody>
 			</table>
+			
 		)
 		}
  }
+ export default connect(
+	 state =>({
+		 Item: state,
+
+	 }),
+	 dispatch => ({})
+ )(Table1);
 //)
 // class Table1 extends React.Component {
 // 	constructor(props) {
