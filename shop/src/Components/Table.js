@@ -9,48 +9,73 @@ import Modal from './mdlConfChoose';
 import modal from './modal'
 import yes from '../image/yes.png';
 import no from '../image/no.png';
-
+import ok from '../image/ok.png';
 //export default props => (
 class Table1 extends React.Component {
 	constructor(props) {
 		super(props);
-		this.chooseItem = this.chooseItem.bind(this);
 
-		this.state = {showModal: false};
+		this.state = {shMdConf: false, shMdGet: false}; // окно подтверждение
+		//this.state = {shMdGet: false};
 
-		this.handleShow = this.handleShow.bind(this);
-		this.handleHide = this.handleHide.bind(this);
+		this.shConf = this.shConf.bind(this);
+		this.hdConf = this.hdConf.bind(this);
+
+		this.shGet = this.shGet.bind(this);
+		this.hdGet = this.hdGet.bind(this);
 	}
-	// Модальное окно
-	handleShow = (e) => {
-		
-		this.setState({showModal: true});
-		
+	// Модальное окно подтверждение
+	shConf = (e) => {
+		this.setState({shMdConf: true, shMdGet: false});
 		this.picture = e.currentTarget.src;
+	}
+	hdConf() {
+		this.setState({shMdConf: false, shMdGet: false});
+	}
+	// Модальное окно получения
+	shGet() {
+		this.setState({shMdGet: true});
 		
-		// console.log(this.props.Item.items.map(item => (
-		// 	item.id
-		// )));
 	}
-
-	handleHide() {
-		this.setState({showModal: false});
-	}
-
-	// выбор товара
-	chooseItem = (e) => {
-		console.log(e.currentTarget.id);
-
+	hdGet() {
+		this.setState({shMdConf: false, shMdGet: false});
+		
 	}
 
 	 render() {
 		 console.log('inputMoney: ' + this.props.data);
-		 	
-		 //Модальное окно modal
-		 
-		 const modal = this.state.showModal ? (
+
+// Окно получения выбора
+		
+		 const mdGet = this.state.shMdGet ? (
+			<Modal>
+				<div className="modalGet">
+					<div className="modalWindow">
+						<div className="modalHeader">
+							<div className="modalTitle">
+							</div>
+							<div className="modalBody">
+								<img src={this.picture} alt="picture" width="100" height="100"/>
+							{this.props.children}
+							<div>
+							Получите Ваш товар
+							</div>
+							</div>
+							<div className="modalFooter">
+							<button onClick={this.hdGet} className="yes">
+							<img src={ok} alt="ok"/>
+							</button>
+							</div>
+					 </div> 
+				 </div>
+			 </div>
+		 </Modal> 
+		) : null;
+
+// Окно подтверждения выбора
+		 const mdConf = this.state.shMdConf ? (
 			 <Modal>
-			 	<div className="modalOverlay">
+			 	<div className="modalConf">
 			 		<div className="modalWindow">
 				 		<div className="modalHeader">
 					 		<div className="modalTitle">
@@ -63,10 +88,11 @@ class Table1 extends React.Component {
 							 </div>
 				 			</div>
 				 			<div className="modalFooter">
-							 <button onClick={this.handleHide} className="yes">
+							 <button onClick={this.shGet} className="yes">
 							 <img src={yes} alt="yes"/>
+							 	{mdGet}
 							 </button>
-							 <button onClick={this.handleHide} className="no">
+							 <button onClick={this.hdConf} className="no">
 							 <img src={no} alt="no"/>
 							 </button>
 					 			
@@ -76,25 +102,12 @@ class Table1 extends React.Component {
 				</div>
 			</Modal> 
 		 ) : null;
-		// 		 <div className="modal">
-		// 			 <div>
-		// 				 Вы выбрали этот товар?
-		// 			 </div>
-					 
-					 
-		// 			 <button onClick={this.handleHide}>
-		// 				<img src={yes} alt="yes"/>
-		// 			 </button>
-		// 		 </div>
-		// 	 </Modal>
-		//  ) : null;
 
-		//console.log(this.props.Item);
 	 	return(
 			
 			<table className="table table-bordered">
 				<thead className="thead-dark">
-					{modal}
+					{mdConf}
     			<tr>
       			<th scrope="col">#</th>
       			<th>Товар</th>
@@ -108,7 +121,7 @@ class Table1 extends React.Component {
 					<tr key={item.id}>
 						<td>{item.id}</td>
 						<td>
-							<button> <img src={item.picture}  onClick={this.handleShow}  alt={item.id} />	</button>
+							<button> <img src={item.picture}  onClick={this.shConf}  alt={item.id} />	</button>
 							
 						</td>
 						<td>{item.name}</td>
