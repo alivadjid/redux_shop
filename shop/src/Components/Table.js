@@ -7,7 +7,8 @@ import './Table.css'
 import Modal from './mdlConfChoose';
 //import items from '../reducers/items';
 import modal from './modal'
-
+import yes from '../image/yes.png';
+import no from '../image/no.png';
 
 //export default props => (
 class Table1 extends React.Component {
@@ -21,10 +22,15 @@ class Table1 extends React.Component {
 		this.handleHide = this.handleHide.bind(this);
 	}
 	// Модальное окно
-	handleShow() {
+	handleShow = (e) => {
 		
 		this.setState({showModal: true});
-		//console.log(e.currentTarget.id);
+		
+		this.picture = e.currentTarget.src;
+		
+		// console.log(this.props.Item.items.map(item => (
+		// 	item.id
+		// )));
 	}
 
 	handleHide() {
@@ -44,19 +50,45 @@ class Table1 extends React.Component {
 		 
 		 const modal = this.state.showModal ? (
 			 <Modal>
-
-				 <div className="modal">
-					 <div>
-						 With a portal, we can render content into a different 
-						 part of the DOM, as if it were any other React child.
-					 </div>
-					 
-					 This is being renderred indeise the #modal-container div.
-					 <button onClick={this.handleHide}>Hide modal</button>
-				 </div>
-			 </Modal>
+			 	<div className="modalOverlay">
+			 		<div className="modalWindow">
+				 		<div className="modalHeader">
+					 		<div className="modalTitle">
+				 			</div>
+							 <div className="modalBody">
+							 	<img src={this.picture} alt="picture" width="100" height="100"/>
+							 {this.props.children}
+							 <div>
+							 Вы выбрали этот товар?
+							 </div>
+				 			</div>
+				 			<div className="modalFooter">
+							 <button onClick={this.handleHide} className="yes">
+							 <img src={yes} alt="yes"/>
+							 </button>
+							 <button onClick={this.handleHide} className="no">
+							 <img src={no} alt="no"/>
+							 </button>
+					 			
+				 			</div>
+						</div> 
+					</div>
+				</div>
+			</Modal> 
 		 ) : null;
-		 
+		// 		 <div className="modal">
+		// 			 <div>
+		// 				 Вы выбрали этот товар?
+		// 			 </div>
+					 
+					 
+		// 			 <button onClick={this.handleHide}>
+		// 				<img src={yes} alt="yes"/>
+		// 			 </button>
+		// 		 </div>
+		// 	 </Modal>
+		//  ) : null;
+
 		//console.log(this.props.Item);
 	 	return(
 			
@@ -76,9 +108,7 @@ class Table1 extends React.Component {
 					<tr key={item.id}>
 						<td>{item.id}</td>
 						<td>
-							<button id={item.id} onClick={this.handleShow}>
-								<img src={item.picture} alt={item.id} />
-							</button>
+							<button> <img src={item.picture}  onClick={this.handleShow}  alt={item.id} />	</button>
 							
 						</td>
 						<td>{item.name}</td>
