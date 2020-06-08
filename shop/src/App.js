@@ -21,22 +21,33 @@ class App extends Component{
     super(props);
     this.state = { value: ''};
     this.handleChange = this.handleChange.bind(this);
+
+    this.onChangeSpeed = this.onChangeSpeed.bind(this);
+
+    
+  }
+
+  onChangeSpeed(price) {
+    let price1 = this.state.value - price;
+    //console.log('price1 = ' + price1);
+    this.setState({ value: price1})
   }
   handleChange(event) {
     this.setState({ value: event.target.value });
     
   }
   render() {
+
   return (
     <div className="App">
       <header className="App-header">
-        <input type="text" value={this.state.value} onChange={this.handleChange} className="moneyInput"/>
+        <input type="inputMoney" value={this.state.value} onChange={this.handleChange} className="moneyInput"/>
         
         <p>
           Вендинговый аппарат
         </p>
         < div className="container">
-        <Table1 data={this.state.value}/>
+        <Table1 data={this.state.value} onChangeSpeed={this.onChangeSpeed}/>
         </div>
       
       </header>
