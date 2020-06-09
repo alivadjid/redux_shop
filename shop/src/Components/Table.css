@@ -23,7 +23,14 @@
   justify-content: center;
   text-align: center;
 } 
-
+.modalConf .modalFooter {
+  margin-left: -110px;
+  
+}
+.modalConf .modalFooter .btn{
+  margin-left: 100px;
+  
+}
 .modalFooter {
   position: fixed;
   margin-top: 30px;
@@ -63,8 +70,11 @@
 } 
 
 .modalGet .modalFooter {
-  margin-left: 20px;
+  margin-left: 30px;
+ 
+
 } 
+
 /* 
 .modalGet {
   border: 5px solid rgb(46, 10, 247);
@@ -123,5 +133,31 @@
   text-align: center;
 } 
 .modalAl .modalFooter {
-  margin-left: 20px;
+  margin-left: 50px;
+} 
+
+.modalEndQ {
+  background-color: rgba(0,0,0,0.5);
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalEndQ .modalWindow {
+  background-color:rgb(255, 255, 255);
+  height: 50%;
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+} 
+.modalEndQ .modalFooter {
+  margin-top: 10px;
+  margin-left: 100px;
 } 

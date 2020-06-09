@@ -16,7 +16,7 @@ class Table1 extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.state = {shMdConf: false, shMdGet: false, shAl: false}; // окно подтверждение
+		this.state = {shMdConf: false, shMdGet: false, shAl: false, shEndQ: false}; // окно подтверждение
 		//this.state = {shMdGet: false};
 
 		this.shConf = this.shConf.bind(this);
@@ -28,6 +28,8 @@ class Table1 extends React.Component {
 		
 		this.hdAl = this.hdAl.bind(this);
 
+		this.hdEndQ = this.hdEndQ.bind(this);
+
 		this.id = 0;
 	}
 	// Модальное окно подтверждение
@@ -37,9 +39,12 @@ class Table1 extends React.Component {
 		let price = this.props.Item.items[id].price;
 		let inputMoney = this.props.data;
 		let restMoney = inputMoney - price;
+		
 		if ( restMoney < 0 ) {
 			this.setState({shAl: true})
-		} else {
+		} else if ( this.props.Item.items[id].quality === 0) {
+			this.setState({shEndQ: true});
+		}else {
 			this.setState({shMdConf: true});
 			this.picture = e.currentTarget.src;
 			this.id = e.currentTarget.alt;
@@ -72,6 +77,9 @@ class Table1 extends React.Component {
 	hdAl() {
 		this.setState({shAl: false});
 	}
+	hdEndQ() {
+		this.setState({shEndQ: false});
+	}
 	 render() {
 
 		 //console.log('inputMoney: ' + this.props.data);
@@ -93,8 +101,8 @@ class Table1 extends React.Component {
 							</div>
 							</div>
 							<div className="modalFooter">
-							<button onClick={this.hdGet} className="yes">
-							<img src={ok} alt="ok"/>
+							<button onClick={this.hdGet} className="btn btn-success">Спасибо!
+							
 							</button>
 							</div>
 					 </div> 
@@ -120,14 +128,8 @@ class Table1 extends React.Component {
 							 </div>
 				 			</div>
 				 			<div className="modalFooter">
-							 <button onClick={this.shGet} className="yes">
-							 <img src={yes} alt="yes"/>
-							 	
-							 </button>
-							 <button onClick={this.hdConf} className="no">
-							 <img src={no} alt="no"/>
-							 </button>
-					 			
+							 <button onClick={this.shGet} className="btn btn-success">Да</button>
+							 <button onClick={this.hdConf} className="btn btn-danger">Нет</button>
 				 			</div>
 						</div> 
 					</div>
@@ -149,8 +151,8 @@ class Table1 extends React.Component {
 							</div>
 							</div>
 							<div className="modalFooter">
-							<button onClick={this.hdAl} className="yes">
-							<img src={ok} alt="yes"/>
+							<button onClick={this.hdAl} className="btn btn-warning">Понял!
+							
 							</button>
 							</div>
 					 </div> 
@@ -159,12 +161,36 @@ class Table1 extends React.Component {
 		 </Modal> 
 		) : null;
 
+		 const mdEndQ = this.state.shEndQ ? (
+			<Modal>
+				<div className="modalEndQ">
+					<div className="modalWindow">
+						<div className="modalHeader">
+							<div className="modalTitle">
+							</div>
+							<div className="modalBody">
+								<img src={alert} alt="picture" width="100" height="100"/>
+							<div>
+							<p>Выбранный продукт закончился. </p>
+							<p>Выберите другой.</p>
+							</div>
+							</div>
+							<div className="modalFooter">
+							<button onClick={this.hdEndQ} className="btn btn-info">Ок</button>
+							</div>
+					 </div> 
+				 </div>
+			 </div>
+		 </Modal> 
+		) : null;	
+
 	 	return(
 			
 			<table className="table table-bordered">
 				<thead className="thead-dark">
 					{mdConf}
 					{mdAl}
+					{mdEndQ}
     			<tr>
       			<th scrope="col">#</th>
       			<th>Товар</th>

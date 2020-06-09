@@ -24,35 +24,67 @@ class App extends Component{
 
     this.onChangeSpeed = this.onChangeSpeed.bind(this);
 
+    this.reset = this.reset.bind(this);
     
+    this.price = 0;
   }
 
   onChangeSpeed(price) {
     let price1 = this.state.value - price;
     //console.log('price1 = ' + price1);
     this.setState({ value: price1})
+    this.price = price1;
   }
   handleChange(event) {
-    this.setState({ value: event.target.value });
-    
+    this.setState({ value: event.target.value }); 
+  }
+  reset() {
+    if ( this.state.value == 0 ) {
+      console.log('нечего выводить')
+      this.setState({value: ''});
+    } else
+    console.log('take your money: ' + this.state.value)
+    this.setState({value: ''});
   }
   render() {
 
   return (
     <div className="App">
       <header className="App-header">
-        <input type="inputMoney" value={this.state.value} onChange={this.handleChange} className="moneyInput"/>
-        
+        <div className="form-group col-xs-12">
+          <div className="input-group mb-3">
+            <input type="text" 
+            className="form-control" 
+            placeholder="Введите значение" 
+            aria-label="Recipient's username" 
+            aria-describedby="button-addon2"
+            value={this.state.value} 
+            onChange={this.handleChange}/>
+            <div className="input-group-append">
+            <button className="btn btn-outline-secondary" 
+            type="button" 
+            id="button-addon2"
+            onClick={this.reset}
+            >Сбросить
+            </button>
+            </div>
+          </div>
+        </div>
+
+        <div className="mainLine">
+          <input type="inputMoney" value={this.state.value} onChange={this.handleChange} className="moneyInput"/>
+          <button type="btnReset" className="btn btn-primary" onClick={this.reset}> Сбросить</button>
+        </div>
         <p>
           Вендинговый аппарат
         </p>
-        < div className="container">
+        <div className="container">
         <Table1 data={this.state.value} onChangeSpeed={this.onChangeSpeed}/>
         </div>
       
       </header>
       
-      </div>
+    </div>
       
     
   );
