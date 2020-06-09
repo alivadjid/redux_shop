@@ -66,6 +66,7 @@ class Table1 extends React.Component {
 	hdGet() {
 		console.log('hdGetFunc')
 		this.setState({shMdGet: false, shMdConf: false});
+		this.props.onMinusQuality(this.id)
 	}
 
 	hdAl() {
@@ -198,5 +199,9 @@ class Table1 extends React.Component {
 		 Item: state,
 
 	 }),
-	 dispatch => ({})
+	 dispatch => ({
+		 onMinusQuality: (id) => {
+			 dispatch({ type: 'MINUS_QUALITY', payload: id})
+		 }
+	 })
  )(Table1);
