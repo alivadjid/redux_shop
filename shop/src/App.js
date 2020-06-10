@@ -17,6 +17,8 @@ import Modal from './Components/mdlConfChoose';
   //   {id: 3, picture: orbit, name: 'Орбит', price: '24', quality: '36'}
   // ];
   //console.log (typeof(data));
+
+  const Currency = React.createContext('123');
 class App extends Component{  
   constructor(props) {
     super(props);
@@ -57,19 +59,22 @@ class App extends Component{
     this.setState({currency: value})
   }
   slctChnge() {
-    console.log('hi');
+    //console.log('hi');
     var curr = document.getElementById("inGrSel01").value;
     switch (curr) {
       case 'RUB':
-        console.log('RUB');
+        //console.log('RUB');
+        // Currency = 'RUB'
         this.setState({curR: curr})
         break;
       case 'USD':
-        console.log('USD');
+        // Currency = 'USD'
+        //console.log('USD');
         this.setState({curR: curr})
         break;
       case 'EUR':
-        console.log('EUR');
+        // Currency = 'EUR'
+        //console.log('EUR');
         this.setState({curR: curr})
         break;
       default:
@@ -134,7 +139,9 @@ class App extends Component{
           Вендинговый аппарат
         </p>
         <div className="container">
-        <Table1 data={this.state.value} dataCur={this.state.curR}onChangeSpeed={this.onChangeSpeed}/>
+        
+          <Table1 data={this.state.value} dataCur={this.state.curR} onChangeSpeed={this.onChangeSpeed}/>
+        
         </div>
       
       </header>

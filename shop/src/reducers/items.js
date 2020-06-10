@@ -61,24 +61,47 @@ const initialState = [
 // 	}
 // }
 export default function items(state = initialState, action) {
-	if (action.type === 'MINUS_QUALITY') {
-		console.log(action);
-		console.log(state);
+	switch(action.type) {
+		case 'MINUS_QUALITY':
+			return state.map( n => n.id === +action.payload
+				? {
+					...n,
+					quality: n.quality - 1
+					}
+					: n)
 		
-		return state.map( n => n.id === +action.payload
+		case 'CUR_PRICE':
+			if (action.payload === 'USD') {
+				
+				return state;
+
+			} else if (action.payload === 'EUR') {
+				return state;
+			}
+		break;
 			
-			? {
-				...n,
-				quality: n.quality - 1
-				}
-				: n
+		default:
+			return state;
+		
+	}
+	// if (action.type === 'MINUS_QUALITY') {
+	// 	console.log(action);
+	// 	console.log(state);
+		
+	// 	return state.map( n => n.id === +action.payload
+			
+	// 		? {
+	// 			...n,
+	// 			quality: n.quality - 1
+	// 			}
+	// 			: n
 			// Math.max(1, n.quality -1 || 0 ),
 			// (n.id === action.payload)
 			// ? {
 			// 	quality: 100
 			// 	}
 			// :'ha-ha'
-		)
-	};
-	return state;
+		// )
+	// };
+
 }

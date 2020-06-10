@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import '../../node_modules/react-bootstrap-table/css/react-bootstrap-table.css';
 //
+
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './Table.css'
 import Modal from './mdlConfChoose';
@@ -11,6 +12,7 @@ import yes from '../image/yes.png';
 import no from '../image/no.png';
 import ok from '../image/ok.png';
 import alert from '../image/alert.png';
+import debounce from '../../node_modules/lodash/debounce'
 //export default props => (
 class Table1 extends React.Component {
 	constructor(props) {
@@ -24,15 +26,20 @@ class Table1 extends React.Component {
 
 		this.shGet = this.shGet.bind(this);
 		this.hdGet = this.hdGet.bind(this);
-		
+		this.funct1 = this.funct1.bind(this);
 		
 		this.hdAl = this.hdAl.bind(this);
 
 		this.hdEndQ = this.hdEndQ.bind(this);
-
+		
+		//console.log('Currency: ' + this.props.dataCur);
 
 		this.id = 0;
+		this.funcClickThrotteled = debounce(this.func1, 200);
 	}
+	// componentWillUnmout(){
+	// 	this.funcClickThrotteled.cancel();
+	// }
 	// Модальное окно подтверждение
 	shConf = (e) => {
 		
@@ -81,10 +88,23 @@ class Table1 extends React.Component {
 	hdEndQ() {
 		this.setState({shEndQ: false});
 	}
-	 render() {
+	funct1() {
+		//this.props.onCurPr(this.props.dataCur);
+		if (this.props.dataCur === 'RUB') {
 
-		 //console.log('inputMoney: ' + this.props.data);
-		console.log('Currency: ' + this.props.dataCur);
+		}
+
+		const cur1 = this.props.dataCur;
+		
+		console.log(cur1)
+	}	
+	 render() {
+		 this.funct1()
+		//console.log(this.context);
+		//console.log('inputMoney: ' + this.props.data);
+		//console.log(this.curren);
+		
+		
 // Окно получения выбора
 		
 		 const mdGet = this.state.shMdGet ? (
@@ -229,6 +249,15 @@ class Table1 extends React.Component {
 	 dispatch => ({
 		 onMinusQuality: (id) => {
 			 dispatch({ type: 'MINUS_QUALITY', payload: id})
-		 }
+		 },
+		 onRUB: (rub) => {
+			 dispatch({ type: 'RUB', payload: rub})
+		 },
+		 onUSD: (usd) => {
+			 dispatch({ type: 'USD', payload: usd})
+		 },
+		 onEUR: (eur) => {
+			dispatch({ type: 'USD', payload: eur})
+		},
 	 })
  )(Table1);
