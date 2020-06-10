@@ -12,7 +12,7 @@ import yes from '../image/yes.png';
 import no from '../image/no.png';
 import ok from '../image/ok.png';
 import alert from '../image/alert.png';
-import debounce from '../../node_modules/lodash/debounce'
+//import throttle from 'lodash.throttle'
 //export default props => (
 class Table1 extends React.Component {
 	constructor(props) {
@@ -26,7 +26,7 @@ class Table1 extends React.Component {
 
 		this.shGet = this.shGet.bind(this);
 		this.hdGet = this.hdGet.bind(this);
-		this.funct1 = this.funct1.bind(this);
+		//this.funct1 = this.funct1.bind(this);
 		
 		this.hdAl = this.hdAl.bind(this);
 
@@ -35,10 +35,27 @@ class Table1 extends React.Component {
 		//console.log('Currency: ' + this.props.dataCur);
 
 		this.id = 0;
-		this.funcClickThrotteled = debounce(this.func1, 200);
+		//this.func2 = throttle(this.funct1, 5000);
+	}
+	componentDidUpdate(prevProps, prevState, snapshot) {
+		if(prevProps.dataCur !== this.props.dataCur) {
+			//this.props.onCuren(this.props.dataCur)
+			console.log(this.props.dataCur)
+			switch (this.props.dataCur) {
+				case 'USD':
+					this.props.onUSD('USD');
+					break;
+				case 'EUR':
+					this.props.onEUR('EUR');
+					console.log('HEre eur')
+					break;
+				default:
+					this.props.onRUB('RUB');
+			}
+		}
 	}
 	// componentWillUnmout(){
-	// 	this.funcClickThrotteled.cancel();
+	// 	this.funct1.cancel();
 	// }
 	// Модальное окно подтверждение
 	shConf = (e) => {
@@ -56,8 +73,8 @@ class Table1 extends React.Component {
 			this.setState({shMdConf: true});
 			this.picture = e.currentTarget.src;
 			this.id = e.currentTarget.alt;
-			console.log('shConf.id: ' + id)
-			console.log('price: '+price);
+			//console.log('shConf.id: ' + id)
+			//console.log('price: '+price);
 		}
 		//console.log(this.props.Item.items[0]);
 		//console.log(e.currentTarget.alt);
@@ -88,18 +105,18 @@ class Table1 extends React.Component {
 	hdEndQ() {
 		this.setState({shEndQ: false});
 	}
-	funct1() {
-		//this.props.onCurPr(this.props.dataCur);
-		if (this.props.dataCur === 'RUB') {
-
-		}
-
-		const cur1 = this.props.dataCur;
-		
-		console.log(cur1)
-	}	
+	// funct1() {
+	// 	//this.props.onCurPr(this.props.dataCur);
+	// 	if (this.props.dataCur === 'RUB') {
+	// 	}
+		// const cur1 = this.props.dataCur;
+		// console.log('jjj'+cur1)
+	//}	
+	// funct2() {
+	// 	this.func2()
+	// }
 	 render() {
-		 this.funct1()
+		 //this.funct2();
 		//console.log(this.context);
 		//console.log('inputMoney: ' + this.props.data);
 		//console.log(this.curren);
@@ -250,14 +267,17 @@ class Table1 extends React.Component {
 		 onMinusQuality: (id) => {
 			 dispatch({ type: 'MINUS_QUALITY', payload: id})
 		 },
-		 onRUB: (rub) => {
-			 dispatch({ type: 'RUB', payload: rub})
+		//  onCuren: (cur) => {
+		// 	 dispatch({ type: cur})
+		//  },
+		 onRUB: () => {
+			 dispatch({ type: 'RUB'})
 		 },
-		 onUSD: (usd) => {
-			 dispatch({ type: 'USD', payload: usd})
+		 onUSD: () => {
+			 dispatch({ type: 'USD'})
 		 },
-		 onEUR: (eur) => {
-			dispatch({ type: 'USD', payload: eur})
+		 onEUR: () => {
+			dispatch({ type: 'EUR'})
 		},
 	 })
  )(Table1);

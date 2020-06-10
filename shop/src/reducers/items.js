@@ -69,21 +69,44 @@ export default function items(state = initialState, action) {
 					quality: n.quality - 1
 					}
 					: n)
-		
-		case 'CUR_PRICE':
-			if (action.payload === 'USD') {
-				
-				return state;
-
-			} else if (action.payload === 'EUR') {
-				return state;
-			}
-		break;
-			
+		case 'USD':
+			return state.map( n => n.price !== 0 
+				?	{
+					...n,
+					price: Number(initialState[n.id].price /60).toFixed(2)
+				}
+				:n);
+		case 'EUR':
+			return state.map( n => n.price !== 0
+				? {
+					...n,
+					price: Number(initialState[n.id].price /80).toFixed(2)
+				}
+				:n);
+		case 'RUB':
+			return state.map( n => n.price !==0 
+				? {
+					...n,
+					price: initialState[n.id].price
+				}
+				:n);
 		default:
 			return state;
-		
 	}
+	// 	case 'CUR_PRICE':
+	// 		if (action.payload === 'USD') {
+				
+	// 			return state;
+
+	// 		} else if (action.payload === 'EUR') {
+	// 			return state;
+	// 		}
+	// 	break;
+			
+	// 	default:
+	// 		return state;
+		
+	// }
 	// if (action.type === 'MINUS_QUALITY') {
 	// 	console.log(action);
 	// 	console.log(state);
