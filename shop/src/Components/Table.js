@@ -30,6 +30,7 @@ class Table1 extends React.Component {
 
 		this.hdEndQ = this.hdEndQ.bind(this);
 
+
 		this.id = 0;
 	}
 	// Модальное окно подтверждение
@@ -83,7 +84,7 @@ class Table1 extends React.Component {
 	 render() {
 
 		 //console.log('inputMoney: ' + this.props.data);
-
+		console.log('Currency: ' + this.props.dataCur);
 // Окно получения выбора
 		
 		 const mdGet = this.state.shMdGet ? (
