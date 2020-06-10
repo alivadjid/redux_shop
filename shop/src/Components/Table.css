@@ -1,3 +1,163 @@
 .table .thead-dark th{
 	background-color: #212529;
 }
+
+.modalConf {
+  background-color: rgba(0,0,0,0.5);
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalConf .modalWindow {
+  background-color:rgb(255, 255, 255);
+  height: 50%;
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+} 
+.modalConf .modalFooter {
+  margin-left: -110px;
+  
+}
+.modalConf .modalFooter .btn{
+  margin-left: 100px;
+  
+}
+.modalFooter {
+  position: fixed;
+  margin-top: 30px;
+  margin-left: -60px;
+  
+}
+
+.modalBody{
+  margin-top: -60px;
+}
+
+.no {
+  margin-left: 60px;
+}
+
+
+.modalGet {
+  background-color: rgba(0,0,0,0);
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalGet .modalWindow {
+  background-color:rgb(255, 255, 255);
+  height: 50%;
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+} 
+
+.modalGet .modalFooter {
+  margin-left: 30px;
+ 
+
+} 
+
+/* 
+.modalGet {
+  border: 5px solid rgb(46, 10, 247);
+  background-color: rgb(255, 255, 255);
+  position: fixed;
+  height: 50%;
+  width: 50%;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+	justify-content: center;
+  text-align: center;
+  margin-top: 200px;
+  margin-left: 400px;
+}
+*/
+
+
+/* .modalAl {
+  border: 5px solid rgb(46, 10, 247);
+  background-color: rgb(255, 255, 255);
+  position: fixed;
+  height: 50%;
+  width: 50%;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+	justify-content: center;
+  text-align: center;
+  margin-top: 200px;
+  margin-left: 400px;
+} */
+
+
+.modalAl {
+  background-color: rgba(0,0,0,0.5);
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalAl .modalWindow {
+  background-color:rgb(255, 255, 255);
+  height: 50%;
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+} 
+.modalAl .modalFooter {
+  margin-left: 50px;
+} 
+
+.modalEndQ {
+  background-color: rgba(0,0,0,0.5);
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalEndQ .modalWindow {
+  background-color:rgb(255, 255, 255);
+  height: 50%;
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+} 
+.modalEndQ .modalFooter {
+  margin-top: 10px;
+  margin-left: 100px;
+} 

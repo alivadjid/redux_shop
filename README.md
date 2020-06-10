@@ -1,2 +1,7 @@
-# redux_shop
-React-redux apply
+## Вендинговый аппарат React-redux
+
+Для запуска проекта 
+
+`npm install`
+
+`npm start`
