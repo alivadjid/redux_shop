@@ -13,19 +13,47 @@ const initialState = [
 	{id: 4, picture: twix, name: 'Твикс', price: '45', quality: '23'}
 ];
 
+function parseXML(xmlString) {
+	var parser = new DOMParser();
+	var docError = parser.parseFromString('INVALID', 'text/xml');
+	var parsererrorNS = docError.getElementsByTagName("parsererror")[0].namespaceURI;
+	var doc = parser.parseFromString(xmlString,'text/xml');
+	if (doc.getElementsByTagNameNS(parsererrorNS, 'parsererror').length>0) {
+		throw new Error('Error parsing XML');
+	}
+	return doc;
+	
+}
 
-
-
-
-function getCurrency() {
-	axios.get('https://www.cbr-xml-daily.ru/daily_utf8.xml')
-    .then(response => (this.info = response.data));
-    console.log(this.info);
-    const parser = new DOMParser();
-    let xmlDoc = parser.parseFromString(this.info, "text/xml")
-    console.log(xmlDoc)
-    let USD = xmlDoc.getElementById("R01235")
-    console.log(USD)
+function getCurrency(curName) {
+	let valuteValue = 60;
+	axios
+    .get('https://www.cbr-xml-daily.ru/daily_utf8.xml')
+    .then(response => {
+      let a = response.data
+      try {
+      //XMLDocumetn object
+      var doc = parseXML(a);
+      } catch (e) {
+      console.log(e)
+      return;
+      }
+      //Element object 
+      var rootElement = doc.documentElement;
+      var children = rootElement.childNodes;
+      for(var i=0; i< children.length; i++) {
+      	var child = children[i];
+        if(child.nodeType == Node.ELEMENT_NODE) {
+        	if (child.attributes.ID.textContent === curName) {
+						console.log(child.getElementsByTagName("Value")[0].textContent);
+						valuteValue = child.getElementsByTagName("Value")[0].textContent;
+						
+          }
+        }
+      }
+		})
+		return valuteValue;
+		
 }
 
 export default function items(state = initialState, action) {
@@ -41,14 +69,14 @@ export default function items(state = initialState, action) {
 			return state.map( n => n.price !== 0 
 				?	{
 					...n,
-					price: Number(initialState[n.id].price /60).toFixed(2)
+					price: Number(initialState[n.id].price /getCurrency('R01235')).toFixed(2)
 				}
 				:n);
 		case 'EUR':
 			return state.map( n => n.price !== 0
 				? {
 					...n,
-					price: Number(initialState[n.id].price /80).toFixed(2)
+					price: Number(initialState[n.id].price /getCurrency('R01239')).toFixed(2)
 				}
 				:n);
 		case 'RUB':
