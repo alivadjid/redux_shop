@@ -7,14 +7,14 @@ class App extends Component{
   constructor(props) {
     super(props);
     this.state = { value: '', shReset: false, value1: '', currency: '', curR: '', money: 0};
-    
+    this.info = '';
     this.handleChange = this.handleChange.bind(this);
     this.onChangeSpeed = this.onChangeSpeed.bind(this);
     this.reset = this.reset.bind(this);
-    //this.price = 0;
     this.hdReset = this.hdReset.bind(this);
     this.slctChnge = this.slctChnge.bind(this);
   }
+ 
   hdReset() {
 		this.setState({shReset: false});
 	}
@@ -46,6 +46,7 @@ class App extends Component{
     
   }
   render() {
+    
     const mdReset = this.state.shReset ? (
       <Modal>
       <div className="modalGet">
