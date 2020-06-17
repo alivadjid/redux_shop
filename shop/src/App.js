@@ -11,11 +11,8 @@ class App extends Component{
     this.handleChange = this.handleChange.bind(this);
     this.onChangeSpeed = this.onChangeSpeed.bind(this);
     this.reset = this.reset.bind(this);
-    //this.price = 0;
     this.hdReset = this.hdReset.bind(this);
     this.slctChnge = this.slctChnge.bind(this);
-
-    //this.parseXML = this.parseXML.bind(this);
   }
  
   hdReset() {
@@ -41,15 +38,6 @@ class App extends Component{
     var currency = document.getElementById("inGrSel01");
     var value = currency.value;
     this.setState({currency: value})
-
-    try {
-    
-     
-    } catch(err) {
-    console.log(err)
-    }
-   
-    
   }
   slctChnge() {
     var curr = document.getElementById("inGrSel01").value;
